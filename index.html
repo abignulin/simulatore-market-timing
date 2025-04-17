@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simulatore Market Timing</title>
+
+  <!-- Link al Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Aggiungi il Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker registrato con successo:', registration);
+          })
+          .catch(error => {
+            console.log('Errore registrazione Service Worker:', error);
+          });
+      });
+    }
+  </script>
+
+  <!-- Icone per la PWA -->
+  <link rel="icon" href="icons/icon-192x192.png" sizes="192x192">
+  <link rel="icon" href="icons/icon-512x512.png" sizes="512x512">
+
+  <!-- Styles -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #0000ff;
+    }
+    #chart {
+      margin-top: 20px;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 32px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simulatore Market Timing</h1>
+
+  <div id="chart">
+    <!-- Il grafico dinamico verrà caricato qui -->
+    <canvas id="marketChart" width="400" height="200"></canvas>
+  </div>
+
+  <div class="controls">
+    <input type="number" id="amount" placeholder="Importo (in €)" min="1" step="1">
+    <br><br>
+    <button class="button" id="buyButton">Compra</button>
+    <button class="button" id="sellButton">Vendi</button>
+  </div>
+
+  <div>
+    <h3>Confronto:</h3>
+    <p>Acquisto iniziale e vendita finale vs. operazioni manuali</p>
+    <p id="finalComparison">Aspettando le operazioni...</p>
+  </div>
+
+  <!-- Link to your JavaScript libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
